@@ -1,0 +1,23 @@
+docker run -it --rm -u 0 -p 8080:8080 -p 8081:8081 -p 4040:4040 -p 18080:18080 -v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container --name spark_container apache/spark-py:3.3.1 /bin/bash
+---
+
+docker run -it --rm -u 0 -p 7077:7077 -p 8080:8080 -p 4040:4040 -p 18080:18080 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container apache/spark-py:3.3.1 /bin/bash
+export SPARK_MASTER_HOST=172.17.0.2
+/opt/spark/sbin/start-master.sh
+
+docker run -it --rm -u 0 -p 8081:8081 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container2 apache/spark-py:3.3.1 /bin/bash
+export SPARK_MASTER_HOST=172.17.0.2
+/opt/spark/sbin/start-worker.sh spark://172.17.0.2:7077
+
+docker run -it --rm -u 0 -p 8888:8888 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container3 apache/spark-py:3.3.1 /bin/bash
+apt-get update
+pip install jupyterlab
+pip install pyspark==3.3.1
+pip install findspark
+jupyter-lab --no-browser --allow-root --ip 0.0.0.0
