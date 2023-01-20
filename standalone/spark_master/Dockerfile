@@ -1,4 +1,4 @@
-FROM spark_standalone_spark
+FROM spark_base
 
 # -- Runtime
 

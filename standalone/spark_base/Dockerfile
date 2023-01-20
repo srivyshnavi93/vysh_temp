@@ -1,4 +1,4 @@
-FROM spark_standalone
+FROM base
 
 ARG spark_version=3.3.1
 ARG hadoop_version=3
