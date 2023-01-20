@@ -11,9 +11,9 @@ services:
       - 8888:8888
     volumes:
       - shared-workspace:/opt/workspace
-  spark-master-node:
-    image: spark_base
-    container_name: spark-master-node
+  spark-master:
+    image: spark_container
+    container_name: spark-master
     environment:
       - SPARK_WORKLOAD=master
     ports:
@@ -21,9 +21,9 @@ services:
       - 7077:7077
     volumes:
       - shared-workspace:/opt/workspace
-  spark-worker-node-1:
-    image: spark_base
-    container_name: spark-worker-node-1
+  spark-worker-1:
+    image: spark_container
+    container_name: spark-worker-1
     environment:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=512m
@@ -33,10 +33,10 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
     depends_on:
-      - spark-master-node
-  spark-worker-node-2:
-    image: spark_base
-    container_name: spark-worker-node-2
+      - spark-master
+  spark-worker-2:
+    image: spark_container
+    container_name: spark-worker-2
     environment:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=512m
@@ -46,4 +46,15 @@ services:
     volumes:
       - shared-workspace:/opt/workspace
     depends_on:
-      - spark-master-node
+      - spark-master      
+  spark-history-server:
+    image: spark_container
+    container_name: spark-history-server
+    environment:
+      - SPARK_WORKLOAD=history      
+    ports:
+      - 18080:18080
+    volumes:
+      - shared-workspace:/opt/workspace
+    depends_on:
+      - spark-master

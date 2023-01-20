@@ -4,13 +4,13 @@ volumes:
     name: "hadoop-distributed-file-system"
     driver: local
 services:
-  jupyterlab:
-    image: jupyter/pyspark-notebook
-    container_name: jupyterlab
-    ports:
-      - 8888:8888
-    volumes:
-      - shared-workspace:/opt/workspace
+  # jupyterlab:
+  #   image: jupyter/pyspark-notebook
+  #   container_name: jupyterlab
+  #   ports:
+  #     - 8888:8888
+  #   volumes:
+  #     - shared-workspace:/opt/workspace
   spark-master:
     image: spark_master_worker
     container_name: spark-master
@@ -34,16 +34,16 @@ services:
       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
-  spark-worker-2:
-    image: spark_master_worker
-    container_name: spark-worker-2
-    environment:
-      - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=512m
-      - SPARK_WORKLOAD=worker      
-    ports:
-      - 8082:8081
-    volumes:
-      - shared-workspace:/opt/workspace
-    depends_on:
-      - spark-master
+  # spark-worker-2:
+  #   image: spark_master_worker
+  #   container_name: spark-worker-2
+  #   environment:
+  #     - SPARK_WORKER_CORES=1
+  #     - SPARK_WORKER_MEMORY=512m
+  #     - SPARK_WORKLOAD=worker      
+  #   ports:
+  #     - 8082:8081
+  #   volumes:
+  #     - shared-workspace:/opt/workspace
+  #   depends_on:
+  #     - spark-master
