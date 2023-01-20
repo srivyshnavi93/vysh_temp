@@ -5,7 +5,7 @@ FROM apache/spark-py:v${SPARK_VERSION}
 USER 0
 RUN apt-get update && apt-get install -y curl git wget nano sudo
 
-# ENV SPARK_MASTER_HOST spark-master
+ENV SPARK_MASTER_HOST spark-master
 ENV SPARK_MASTER_PORT 7077
 
 ARG SPARK_MASTER_WEB_UI=8080
@@ -17,3 +17,5 @@ EXPOSE ${SPARK_MASTER_WEB_UI} ${SPARK_MASTER_PORT} ${SPARK_WORKER_WEB_UI} ${SPAR
 
 COPY requirements.txt /
 COPY conf /opt/spark/conf
+
+WORKDIR ${SPARK_HOME}
