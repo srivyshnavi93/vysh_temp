@@ -73,6 +73,16 @@ docker run -it \
 apache/spark-py:3.3.1 \
 /bin/bash
 
+Note: Worker container port is always 8081 and we are mapping that to 8082 in our host, since first worker has taken host's 8081 port
+docker run -it \
+--rm \
+-u 0 \
+-p 8082:8081 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container_worker_2 \
+apache/spark-py:3.3.1 \
+/bin/bash
+
 # Root user is 0, 8080 - master node, 8081 - worker node, 4040 - running spark web UI, 18080 - spark history server
 docker run -it \
 --rm \
@@ -130,6 +140,9 @@ spark-defaults.conf
 spark.eventLog.enabled true
 spark.eventLog.dir file:/opt/spark/spark-events
 spark.history.fs.logDirectory file:/opt/spark/spark-events
+
+Note:
+Run spark-submit command from worker node.
 
 
 
