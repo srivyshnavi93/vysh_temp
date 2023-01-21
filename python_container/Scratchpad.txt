@@ -25,6 +25,7 @@ pip install findspark
 jupyter-lab --no-browser --allow-root --ip 0.0.0.0
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
+Vyshnavi:
 
 docker run -it \
 --rm \
@@ -51,6 +52,27 @@ docker run -it \
 apache/spark-py:3.3.1 \
 /bin/bash
 
+docker run -it \
+--rm \
+-u 0 \
+-p 7077:7077 \
+-p 8080:8080 \
+-p 4040:4040 \
+-p 18080:18080 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container_master \
+apache/spark-py:3.3.1 \
+/bin/bash
+
+docker run -it \
+--rm \
+-u 0 \
+-p 8081:8081 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container_worker \
+apache/spark-py:3.3.1 \
+/bin/bash
+
 # Root user is 0, 8080 - master node, 8081 - worker node, 4040 - running spark web UI, 18080 - spark history server
 docker run -it \
 --rm \
@@ -74,11 +96,29 @@ docker build -t spark_image .
 
 docker run --rm -it --name spark_container spark_image
 
-Running in standalone mode:
+Running in standalone mode:(running master and worker in same container)
 ----------------------------
 /opt/spark/sbin/start-history-server.sh
 /opt/spark/sbin/start-master.sh -h 127.0.0.1
 /opt/spark/sbin/start-worker.sh spark://127.0.0.1:7077
+
+Running in standalone mode:(running master and worker in different container)
+----------------------------
+/opt/spark/sbin/start-history-server.sh
+/opt/spark/sbin/start-master.sh [start in master container]
+ ==> sbin/start-master.sh
+/opt/spark/sbin/start-worker.sh spark://127.0.0.1:7077 [start in worker container]
+ ====> sbin/start-worker.sh spark://e0d78f1b5179:7077 [spark://127.0.0.1:7077 will be changing need to check in localhost:8080]
+
+To find out the master IP address
+- go to master container and give nano /etc/hosts and you will find the master container IP address in the last line
+sbin/start-worker.sh spark://<master_ip_address>:7077
+General note: 
+---------------
+All the docker containers have the same IP address as 127.0.0.1 and two different docker containers cannot communicate with each other.
+They can only communicate via host.
+So, we need to port map master container listener port(7077) to host port(7077)
+And then we need to start worker with host ip address and port 7077
 
 Note:
 1.To run spark history server, you need to create "conf", "spark-events" folder in  - root@e4f5596c7798:/opt/spark# ls
