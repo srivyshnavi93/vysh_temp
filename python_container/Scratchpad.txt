@@ -1,3 +1,5 @@
+----------------------------------------------------------------------------------------------------
+-- TODO: Clean this up
 docker run -it --rm -u 0 -p 8080:8080 -p 8081:8081 -p 4040:4040 -p 18080:18080 -v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container --name spark_container apache/spark-py:3.3.1 /bin/bash
 ---
 
@@ -21,3 +23,95 @@ pip install jupyterlab
 pip install pyspark==3.3.1
 pip install findspark
 jupyter-lab --no-browser --allow-root --ip 0.0.0.0
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+docker run -it \
+--rm \
+--name spark_container \
+apache/spark-py:3.3.1 \
+/opt/spark/bin/pyspark  
+
+
+docker run -it \
+--name spark_container \
+apache/spark-py:3.3.1 \
+/opt/spark/bin/pyspark
+
+
+docker run -it \
+--rm \
+-u 0 \
+-p 8080:8080 \
+-p 8081:8081 \
+-p 4040:4040 \
+-p 18080:18080 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container \
+apache/spark-py:3.3.1 \
+/bin/bash
+
+# Root user is 0, 8080 - master node, 8081 - worker node, 4040 - running spark web UI, 18080 - spark history server
+docker run -it \
+--rm \
+-p 8080:8080 \
+-u 0 \
+-v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
+--name spark_container \
+apache/spark-py:3.3.1 \
+/opt/spark/bin/spark-submit /opt/spark/work-dir/python_container/spark_example.py
+
+
+
+docker ps
+docker cp python_container/spark_example.py 8e27eb5dc3af:/opt/spark/work-dir/spark_example.py
+docker exec -it spark_container bash
+
+
+docker run -v /Users/vyshnavi/Documents/GitHub/python_container/:/opt/spark/work-dir/python_container apache/spark-py:3.3.1
+
+docker build -t spark_image .
+
+docker run --rm -it --name spark_container spark_image
+
+Running in standalone mode:
+----------------------------
+/opt/spark/sbin/start-history-server.sh
+/opt/spark/sbin/start-master.sh -h 127.0.0.1
+/opt/spark/sbin/start-worker.sh spark://127.0.0.1:7077
+
+Note:
+1.To run spark history server, you need to create "conf", "spark-events" folder in  - root@e4f5596c7798:/opt/spark# ls
+2. In "conf" folder need to add spark-defaults.conf file
+root@e4f5596c7798:/opt/spark/conf# ls
+spark-defaults.conf
+3. COntents in spark-defaults.conf file are:
+
+spark.eventLog.enabled true
+spark.eventLog.dir file:/opt/spark/spark-events
+spark.history.fs.logDirectory file:/opt/spark/spark-events
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
