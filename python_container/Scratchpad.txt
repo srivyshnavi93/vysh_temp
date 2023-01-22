@@ -61,7 +61,7 @@ docker run -it \
 -p 18080:18080 \
 -v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
 --name spark_container_master \
-apache/spark-py:3.3.1 \
+spark_image \
 /bin/bash
 
 docker run -it \
@@ -70,7 +70,7 @@ docker run -it \
 -p 8081:8081 \
 -v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
 --name spark_container_worker \
-apache/spark-py:3.3.1 \
+spark_image \
 /bin/bash
 
 Note: Worker container port is always 8081 and we are mapping that to 8082 in our host, since first worker has taken host's 8081 port
@@ -80,7 +80,7 @@ docker run -it \
 -p 8082:8081 \
 -v /Users/vyshnavi/Documents/GitHub/vysh_temp/python_container/:/opt/spark/work-dir/python_container \
 --name spark_container_worker_2 \
-apache/spark-py:3.3.1 \
+spark_image \
 /bin/bash
 
 # Root user is 0, 8080 - master node, 8081 - worker node, 4040 - running spark web UI, 18080 - spark history server
