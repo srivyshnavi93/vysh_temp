@@ -1,0 +1,24 @@
+version: "3.6"
+services:
+  zookeeper:
+    image: ubuntu/zookeeper:edge
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      - intra_network
+  kafka-broker:
+    image: ubuntu/kafka:edge
+    container_name: kafka-broker
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+    ports:
+      - 9092:9092
+    networks:
+      - intra_network      
+    depends_on:
+      - zookeeper    
+
+networks:
+  intra_network:
+    driver: bridge
