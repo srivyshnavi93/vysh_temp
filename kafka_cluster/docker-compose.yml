@@ -6,7 +6,7 @@ services:
     ports:
       - 2181:2181
     networks:
-      - intra_network
+      - odp_intra_network
   kafka-broker:
     image: ubuntu/kafka:edge
     container_name: kafka-broker
@@ -15,10 +15,22 @@ services:
     ports:
       - 9092:9092
     networks:
-      - intra_network      
+      - odp_intra_network      
     depends_on:
       - zookeeper    
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 9090:8080
+    networks:
+      - odp_intra_network      
+    depends_on:
+      - kafka-broker
+    environment:
+      KAFKA_CLUSTERS_0_NAME: kafka-broker
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker:9092    
 
 networks:
-  intra_network:
-    driver: bridge
+  odp_intra_network:
+    external: true
