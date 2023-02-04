@@ -1,0 +1,1 @@
+docker network create --driver bridge odp_intra_network

@@ -13,7 +13,7 @@ services:
       - 8888:8888
       - 4041:4040
     networks:
-      - kafka_cluster_intra_network      
+      - odp_intra_network      
     volumes:
       - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - shared-workspace:/opt/spark/shared-workspace
@@ -27,7 +27,7 @@ services:
       - 7077:7077
       - 4040:4040
     networks:
-      - kafka_cluster_intra_network      
+      - odp_intra_network      
     volumes:
       - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - shared-workspace:/opt/spark/shared-workspace
@@ -41,7 +41,7 @@ services:
     ports:
       - 8081:8081
     networks:
-      - kafka_cluster_intra_network      
+      - odp_intra_network      
     volumes:
       - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - shared-workspace:/opt/spark/shared-workspace
@@ -57,7 +57,7 @@ services:
     ports:
       - 8082:8081
     networks:
-      - kafka_cluster_intra_network      
+      - odp_intra_network      
     volumes:
       - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - shared-workspace:/opt/spark/shared-workspace
@@ -71,7 +71,7 @@ services:
     ports:
       - 18080:18080
     networks:
-      - kafka_cluster_intra_network      
+      - odp_intra_network      
     volumes:
       - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - shared-workspace:/opt/spark/shared-workspace 
@@ -79,5 +79,5 @@ services:
       - spark-master
 
 networks:
-  kafka_cluster_intra_network:
+  odp_intra_network:
     external: true      
