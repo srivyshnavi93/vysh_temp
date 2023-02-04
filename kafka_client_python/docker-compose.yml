@@ -4,15 +4,15 @@ services:
     image: python:3.10-slim
     container_name: producer
     networks:
-      - kafka_cluster_intra_network 
+      - odp_intra_network 
     command: tail -F anything 
   consumer:
     image: python:3.10-slim
     container_name: consumer
     networks:
-      - kafka_cluster_intra_network        
+      - odp_intra_network        
     command: tail -F anything 
 
 networks:
-  kafka_cluster_intra_network:
+  odp_intra_network:
     external: true
