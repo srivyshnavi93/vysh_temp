@@ -1,0 +1,14 @@
+apt-get update && apt-get install nano -y && nano /opt/kafka/config/server.properties
+
+listeners=INTERNAL://:29092,EXTERNAL://:9092
+
+# Hostname and port the broker will advertise to producers and consumers. If not set, 
+# it uses the value for "listeners" if configured.  Otherwise, it will use the value
+# returned from java.net.InetAddress.getCanonicalHostName().
+advertised.listeners=INTERNAL://:29092,EXTERNAL://localhost:9092
+
+inter.broker.listener.name=INTERNAL
+
+# Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
+listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+
