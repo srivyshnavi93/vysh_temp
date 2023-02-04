@@ -1,0 +1,18 @@
+version: "3.6"
+services:
+  producer:
+    image: openjdk
+    container_name: java_producer
+    networks:
+      - kafka_cluster_intra_network 
+    command: tail -F anything 
+  consumer:
+    image: openjdk
+    container_name: java_consumer
+    networks:
+      - kafka_cluster_intra_network        
+    command: tail -F anything 
+
+networks:
+  kafka_cluster_intra_network:
+    external: true

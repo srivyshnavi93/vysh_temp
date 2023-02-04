@@ -145,7 +145,7 @@ Note:
 Run spark-submit command from worker node.
 
 
-
+ docker network ls
 
 
 
