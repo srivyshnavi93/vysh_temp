@@ -10,7 +10,7 @@ services:
     image: python:3.10-slim
     container_name: consumer
     networks:
-      - kafka_cluster_intra_network  
+      - kafka_cluster_intra_network        
     command: tail -F anything 
 
 networks:
