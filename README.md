@@ -25,3 +25,4 @@ Next Steps:
 - [Medium Atricle](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445)
 - [Jupyter Spark image Documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/specifics.html#apache-spark)
 - [Startup script Example](https://cloudinfrastructureservices.co.uk/create-apache-spark-docker-container-using-docker-compose/)
+- [Kafka Advertised Listeners](https://rmoff.net/2018/08/02/kafka-listeners-explained/)

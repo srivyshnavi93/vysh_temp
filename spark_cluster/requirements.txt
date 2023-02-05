@@ -5,3 +5,5 @@ jupyterlab==3.5.2
 confluent-kafka==1.9.2
 delta-spark==2.2.0
 kafka-python==2.0.2
+findspark==2.0.1
+mysql_connector_python==8.0.32
