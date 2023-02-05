@@ -9,10 +9,12 @@
 
 ### Developer Details:
 
-1. Start a docker network by running [intra_network.sh](intra_network/intra_network.sh) 
-2. Create a kafka cluster by running [docker compose](kafka_cluster/docker-compose.yml) file in kafka_cluster directory.
-3. Build spark image using the [Docker file](spark_cluster/Dockerfile).
-4. Create a spark cluster by running [docker compose](spark_cluster/docker-compose.yml) file in spark_cluster directory.
+1. Create a docker network by running [intra_network.sh](intra_network/intra_network.sh) 
+2. Create a docker volume by running [intra_storage.sh](intra_storage/intra_storage.sh)
+3. Create a kafka cluster by running [docker compose](kafka_cluster/docker-compose.yml) file in kafka_cluster directory.
+4. Build spark image using the [Docker file](spark_cluster/Dockerfile).
+4. Build mysql image using the [Docker file](spark_cluster/metastore/Dockerfile).
+5. Create a spark cluster by running [docker compose](spark_cluster/docker-compose.yml) file in spark_cluster directory.
 
 Next Steps:
 
