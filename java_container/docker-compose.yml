@@ -1,18 +1,19 @@
 version: "3.6"
-services:
+volumes:
+  shared-workspace:
+    name: "shared-workspace"
+    driver: local
+services:    
   producer:
-    image: openjdk
-    container_name: java_producer
+    image: java_image
+    container_name: kafka-java
+    volumes:
+      - /Users/vyshnavi/Documents/GitHub/kafka-java/:/java-ex/kafka-java
+      - shared-workspace:/java-ex/shared-workspace
     networks:
-      - kafka_cluster_intra_network 
-    command: tail -F anything 
-  consumer:
-    image: openjdk
-    container_name: java_consumer
-    networks:
-      - kafka_cluster_intra_network        
+      - odp_intra_network 
     command: tail -F anything 
 
 networks:
-  kafka_cluster_intra_network:
+  odp_intra_network:
     external: true
