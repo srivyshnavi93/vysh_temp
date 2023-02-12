@@ -5,21 +5,21 @@
 # If the spark work_load is master, run master
 if [ "$SPARK_WORKLOAD" == "master" ];
 then
-    mkdir -p $SPARK_HOME/shared-workspace/spark/logs/master-logs
-    touch $SPARK_HOME/shared-workspace/spark/logs/master-logs/spark-master.out
-    $SPARK_HOME/sbin/start-master.sh >> $SPARK_HOME/shared-workspace/spark/logs/master-logs/spark-master.out 
+    mkdir -p $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/master
+    touch $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/master/spark-master.out
+    $SPARK_HOME/sbin/start-master.sh >> $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/master/spark-master.out
 
 # If the spark work_load is worker, run worker
 elif [ "$SPARK_WORKLOAD" == "worker" ];
 then
-    mkdir -p $SPARK_HOME/shared-workspace/spark/logs/worker-logs
-    touch $SPARK_HOME/shared-workspace/spark/logs/worker-logs/spark-worker.out
-    $SPARK_HOME/sbin/start-worker.sh spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT} >> $SPARK_HOME/shared-workspace/spark/logs/worker-logs/spark-worker.out
+    mkdir -p $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/worker
+    touch $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/worker/spark-worker.out
+    $SPARK_HOME/sbin/start-worker.sh spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT} >> $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/worker/spark-worker.out
 
 # If the spark work_load is history, run history-server
 elif [ "$SPARK_WORKLOAD" == "history" ];
 then
-    mkdir -p $SPARK_HOME/shared-workspace/spark/logs/spark-hist-logs
+    mkdir -p $SPARK_HOME/work-dir/odp_intra_storage/spark/logs/history-server/spark-hist-logs
     $SPARK_HOME/sbin/start-history-server.sh
 
 # If the spark work_load is jupyter, run jupyter-lab
