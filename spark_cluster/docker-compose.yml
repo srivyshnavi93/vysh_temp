@@ -41,6 +41,7 @@ services:
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - spark-master
+      - metastore
   spark-worker-2:
     image: spark_image
     container_name: spark-worker-2
@@ -54,7 +55,8 @@ services:
       - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
-      - spark-master           
+      - spark-master  
+      - metastore         
   spark-history-server:
     image: spark_image
     container_name: spark-history-server
@@ -69,6 +71,23 @@ services:
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
     depends_on:
       - spark-master
+      - metastore
+  spark-thrift-server:
+    image: spark_image
+    container_name: spark-thrift-server
+    environment:
+      - SPARK_WORKLOAD=thrift      
+    ports:
+      - 10000:10000
+      - 10001:10001
+    networks:
+      - odp_intra_network      
+    volumes:
+      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
+    depends_on:
+      - spark-master 
+      - metastore     
   jupyterlab:
     image: spark_image
     container_name: jupyterlab

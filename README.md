@@ -28,3 +28,5 @@ Next Steps:
 - [Jupyter Spark image Documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/specifics.html#apache-spark)
 - [Startup script Example](https://cloudinfrastructureservices.co.uk/create-apache-spark-docker-container-using-docker-compose/)
 - [Kafka Advertised Listeners](https://rmoff.net/2018/08/02/kafka-listeners-explained/)
+- [Spark Thrift Server](https://spark.apache.org/docs/latest/sql-distributed-sql-engine.html)
+- [Spark Thrift Server Example](https://chenriang.me/connect-delta-lake-with-jdbc.html)
