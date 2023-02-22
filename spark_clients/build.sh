@@ -23,3 +23,14 @@ jdbc:hive2://172.30.0.8:10001/default;transportMode=http;httpPath=cliservice
 
 !connect jdbc:hive2://spark-thrift-server:10001/default?hive.server2.transport.mode=http;hive.server2.thrift.http.path=cliservice
 !connect jdbc:hive2://localhost:10001/hive;transportMode=http;httpPath=cliservice
+
+
+
+
+docker run --rm -d -p 8088:8088 --network odp_intra_network --name superset_test apache/superset:master
+
+docker exec -it superset_test superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin
+
+docker exec -it superset_test superset db upgrade
+ 
+docker exec -it superset_test superset init
