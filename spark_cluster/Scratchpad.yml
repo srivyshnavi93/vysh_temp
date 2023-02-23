@@ -1,0 +1,17 @@
+# test_container
+docker run --rm -d -it -u 0 -p 7077:7077 -p 8080:8080 -p 8081:8081 -p 10000:10000 -p 10001:10001 --network odp_intra_network --name test_container apache/spark-py:v3.3.1 /bin/bash
+
+docker exec -it test_container bash
+
+cd ..
+apt-get -qq update && apt -qq install nano
+# copy hive-site.xml
+sbin/start-master.sh -h 127.0.0.1 -p 7077
+sbin/start-worker.sh spark://127.0.0.1:7077
+sbin/start-thriftserver.sh
+
+
+docker run --name cloudbeaver --rm -ti -p 8978:8978 -v /Users/manojmukkamala/docker_volumes/odp_intra_storage/cloudbeaver/var/lcloudbeaverib/workspace:/opt/cloudbeaver/workspace --network odp_intra_network dbeaver/cloudbeaver:22.3.4
+
+
+docker run --name sqlpad --rm -ti -p 3000:3000 -v /Users/manojmukkamala/docker_volumes/odp_intra_storage/sqlpad/var/lib/sqlpad:/var/lib/sqlpad --network odp_intra_network -e SQLPAD_AUTH_DISABLED="false" sqlpad/sqlpad:7.0

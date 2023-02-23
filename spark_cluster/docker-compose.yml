@@ -9,7 +9,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - /Users/manojmukkamala/docker_volumes/odp_intra_storage/mysql/var/lib/mysql:/var/lib/mysql
   spark-master:
     image: spark_image
@@ -23,7 +23,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - metastore     
@@ -37,10 +37,11 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - spark-master
+      - metastore
   spark-worker-2:
     image: spark_image
     container_name: spark-worker-2
@@ -51,10 +52,11 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
-      - spark-master           
+      - spark-master  
+      - metastore         
   spark-history-server:
     image: spark_image
     container_name: spark-history-server
@@ -65,23 +67,27 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
     depends_on:
       - spark-master
-  jupyterlab:
+      - metastore
+  spark-thrift-server:
     image: spark_image
-    container_name: jupyterlab
+    container_name: spark-thrift-server
     environment:
-      - SPARK_WORKLOAD=jupyter     
+      - SPARK_WORKLOAD=thrift      
     ports:
-      - 8888:8888
-      - 4041:4040
+      - 10000:10000
+      - 10001:10001
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/manoj_repo/:/opt/spark/work-dir/manoj_repo
-      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage          
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
+    depends_on:
+      - spark-master 
+      - metastore      
 
 networks:
   odp_intra_network:
