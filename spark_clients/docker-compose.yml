@@ -1,0 +1,34 @@
+version: "3.6"
+
+services:
+  jupyterlab:
+    image: spark_image
+    container_name: jupyterlab
+    environment:
+      - SPARK_WORKLOAD=jupyter     
+    ports:
+      - 8888:8888
+      - 4041:4040
+    networks:
+      - odp_intra_network      
+    volumes:
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
+  superset:
+    image: superset_image
+    container_name: superset
+    ports:
+      - 8088:8088
+    networks:
+      - odp_intra_network   
+    volumes:
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - odp_intra_storage:/odp_intra_storage      
+
+networks:
+  odp_intra_network:
+    external: true      
+
+volumes:
+  odp_intra_storage:
+    external: true

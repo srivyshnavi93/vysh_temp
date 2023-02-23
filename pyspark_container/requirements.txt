@@ -1,6 +1,0 @@
-numpy==1.23.5
-pandas==1.5.2
-matplotlib==3.6.2
-jupyterlab==3.5.2
-confluent-kafka==1.9.2
-delta-spark==2.2.0
