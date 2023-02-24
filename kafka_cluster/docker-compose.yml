@@ -1,19 +1,22 @@
 version: "3.6"
 services:
   zookeeper:
-    image: ubuntu/zookeeper:edge
+    image: kafka_image
     container_name: zookeeper
+    environment:
+      - KAFKA_WORKLOAD=zookeeper    
     ports:
       - 2181:2181
     networks:
       - odp_intra_network
   kafka-broker:
-    image: ubuntu/kafka:edge
+    image: kafka_image
     container_name: kafka-broker
     environment:
-      - ZOOKEEPER_HOST=zookeeper
+      - KAFKA_WORKLOAD=broker
     ports:
       - 9092:9092
+      - 7071:7071
     networks:
       - odp_intra_network      
     depends_on:

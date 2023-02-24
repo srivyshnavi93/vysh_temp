@@ -1,0 +1,6 @@
+docker run -d --name prometheus-container -p 30090:9090 ubuntu/prometheus:edge
+
+docker run -d -p 30090:9090 --name prometheus -v /Users/manojmukkamala/Documents/GitHub/vysh_temp/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml --network odp_intra_network prom/prometheus:v2.42.0
+
+docker run -d --name=grafana -p 3000:3000 --network odp_intra_network grafana/grafana:9.3.6
+
