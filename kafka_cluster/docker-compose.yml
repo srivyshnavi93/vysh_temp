@@ -35,7 +35,8 @@ services:
     depends_on:
       - kafka-broker
     environment:
-      KAFKA_CLUSTERS_0_NAME: kafka-broker    
+      KAFKA_CLUSTERS_0_NAME: kafka-broker
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker:9092    
 
 networks:
   odp_intra_network:
