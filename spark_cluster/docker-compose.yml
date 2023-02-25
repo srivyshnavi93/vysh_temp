@@ -9,8 +9,8 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
-      - /Users/vyshnavi/docker_volumes/odp_intra_storage/mysql/var/lib/mysql:/var/lib/mysql
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - /Users/manojmukkamala/docker_volumes/odp_intra_storage/mysql/var/lib/mysql:/var/lib/mysql
   spark-master:
     image: spark_image
     container_name: spark-master
@@ -23,7 +23,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - metastore     
@@ -37,7 +37,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - spark-master
@@ -52,7 +52,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
     depends_on:
       - spark-master  
@@ -67,7 +67,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
     depends_on:
       - spark-master
@@ -83,8 +83,11 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp:/opt/spark/work-dir/vysh_temp
-      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage          
+      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
+    depends_on:
+      - spark-master 
+      - metastore      
 
 networks:
   odp_intra_network:
