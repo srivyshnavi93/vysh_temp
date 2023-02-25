@@ -6,3 +6,4 @@ my_consumer = KafkaConsumer('test-topic-1', bootstrap_servers = ['kafka-broker:9
 
 for m in my_consumer:
         print(m.value)
+        sleep(1)
