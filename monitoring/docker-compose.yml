@@ -9,8 +9,8 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /Users/manojmukkamala/docker_volumes/odp_intra_storage/prometheus/prometheus:/prometheus
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/prometheus/prometheus:/prometheus
   grafana:
     image: grafana/grafana:9.3.6
     container_name: grafana
@@ -19,7 +19,7 @@ services:
     networks:
       - odp_intra_network     
     volumes:
-      - /Users/manojmukkamala/docker_volumes/odp_intra_storage/grafana/var/lib/grafana:/var/lib/grafana
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/grafana/var/lib/grafana:/var/lib/grafana
 
 networks:
   odp_intra_network:
