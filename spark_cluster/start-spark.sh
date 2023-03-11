@@ -32,7 +32,6 @@ elif [ "$SPARK_WORKLOAD" == "jupyter" ];
 then
     jupyter lab --no-browser --allow-root --ip 0.0.0.0 --NotebookApp.token='' 
 
-
 # If the spark work_load is submit, run nothing
 elif [ "$SPARK_WORKLOAD" == "submit" ];
 then

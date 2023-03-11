@@ -12,7 +12,7 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
   superset:
     image: superset_image
@@ -22,7 +22,6 @@ services:
     networks:
       - odp_intra_network   
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
       - odp_intra_storage:/odp_intra_storage      
 
 networks:
