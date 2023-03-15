@@ -50,4 +50,4 @@ while True:
     payload = {'data' : weather_info}
     print(payload)
     kafka_producer.send(topic = 'weather_test_v1', value = payload)
-    sleep(30)
+    sleep(60)

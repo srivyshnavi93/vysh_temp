@@ -1,0 +1,2 @@
+pipeline_id,group_id,kafka_topic,username_key,password_key,server,region,bronze_table,bronze_database,bronze_checkpoint,trigger_interval,maxOffsetsPerTrigger,minPartitions,partition_cols,optimized_write,optimize_batch_frequency
+1,1,weather_{env}_v1,Kafka_Username,Kafka_Server_Password,Kafka_Server,Kafka_Region,weather_{env}_v1,bronze,/opt/spark/work-dir/odp_intra_storage/spark/datalake/bronze.db/weather_{env}_v1/_ckpt,120 seconds,,,,,
