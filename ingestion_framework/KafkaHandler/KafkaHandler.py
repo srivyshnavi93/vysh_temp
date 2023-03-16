@@ -5,10 +5,8 @@ from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import col
 from pyspark.sql.types import DateType
 from pyspark.sql.streaming import StreamingQuery
-from confluent_kafka import TopicPartition
 from dateutil import parser
 import certifi
-import asyncio
 from confluent_kafka import Consumer, TopicPartition
 import time
 

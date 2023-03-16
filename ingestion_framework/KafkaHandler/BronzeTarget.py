@@ -2,7 +2,6 @@ from ingestion_framework.Includes.Utils import try_get_column_int
 from pyspark.sql import Row
 from typing import Optional
 from dataclasses import dataclass
-from pyspark.sql.streaming import StreamingQuery
 
 @dataclass
 class BronzeTarget: 
