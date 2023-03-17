@@ -18,6 +18,49 @@
 
 6. Set the `USERNAME` environement in [run.sh](run.sh) and run the file to start the project.
 
+---
+
+### Open Data Platform Architecture
+
+![imager](docs/open_data_platform.png)
+
+### Spark Cluster Architecture
+
+![imager](docs/spark_cluster.png)
+
+---
+
+### Screenshots
+
+#### Kafka UI
+
+![imager](docs/kafka_ui.png)
+
+---
+
+#### Spark
+
+![imager](docs/spark.png)
+
+---
+
+#### Prometheus
+
+![imager](docs/prometheus.png)
+
+---
+
+####  Grafana
+
+![imager](docs/grafana.png)
+
+---
+
+#### Superset
+
+![imager](docs/superset.png)
+
+---
 
 ### Resources:
 - [Docker Networking Tutorial](https://docs.docker.com/network/network-tutorial-standalone/#use-user-defined-bridge-networks)
