@@ -12,4 +12,4 @@ while True:
     my_data = {'data' : str(n)}
     print(my_data)
     my_producer.send(topic = 'test-topic-1', value = my_data)
-    sleep(1)
+    sleep(10)

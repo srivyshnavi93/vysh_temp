@@ -6,7 +6,7 @@ services:
     networks:
       - odp_intra_network 
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts     
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts     
     command: tail -F anything 
   consumer:
     image: python:3.10-slim
@@ -14,7 +14,7 @@ services:
     networks:
       - odp_intra_network  
     volumes:
-      - /Users/manojmukkamala/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts            
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts            
     command: tail -F anything 
 
 networks:
