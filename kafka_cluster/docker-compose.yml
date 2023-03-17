@@ -1,0 +1,43 @@
+version: "3.6"
+services:
+  zookeeper:
+    image: kafka_image
+    container_name: zookeeper
+    environment:
+      - KAFKA_WORKLOAD=zookeeper    
+    ports:
+      - 2181:2181
+    networks:
+      - odp_intra_network
+    volumes:
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/zookeeper/tmp/zookeeper:/tmp/zookeeper      
+  kafka-broker:
+    image: kafka_image
+    container_name: kafka-broker
+    environment:
+      - KAFKA_WORKLOAD=broker
+    ports:
+      - 9092:9092
+      - 7071:7071
+    networks:
+      - odp_intra_network
+    volumes:
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/kafka-broker/tmp/kafka-logs:/tmp/kafka-logs
+    depends_on:
+      - zookeeper    
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 9090:8080
+    networks:
+      - odp_intra_network      
+    depends_on:
+      - kafka-broker
+    environment:
+      KAFKA_CLUSTERS_0_NAME: kafka-broker
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker:9092    
+
+networks:
+  odp_intra_network:
+    external: true

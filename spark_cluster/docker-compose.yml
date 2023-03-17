@@ -1,0 +1,98 @@
+version: "3.6"
+
+services:
+  metastore:
+    image: mysql_metastore
+    container_name: metastore
+    ports:
+      - 3306:3306
+    networks:
+      - odp_intra_network      
+    volumes:
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/mysql/var/lib/mysql:/var/lib/mysql
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+  spark-master:
+    image: spark_image
+    container_name: spark-master
+    environment:
+      - SPARK_WORKLOAD=master
+    ports:
+      - 8080:8080
+      - 7077:7077
+      - 4040:4040
+    networks:
+      - odp_intra_network      
+    volumes:
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+    depends_on:
+      - metastore     
+  spark-worker-1:
+    image: spark_image
+    container_name: spark-worker-1
+    environment:
+      - SPARK_WORKLOAD=worker      
+    ports:
+      - 8081:8081
+    networks:
+      - odp_intra_network      
+    volumes:
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+    depends_on:
+      - spark-master
+      - metastore
+  spark-worker-2:
+    image: spark_image
+    container_name: spark-worker-2
+    environment:
+      - SPARK_WORKLOAD=worker      
+    ports:
+      - 8082:8081
+    networks:
+      - odp_intra_network      
+    volumes:
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+    depends_on:
+      - spark-master  
+      - metastore         
+  spark-history-server:
+    image: spark_image
+    container_name: spark-history-server
+    environment:
+      - SPARK_WORKLOAD=history      
+    ports:
+      - 18080:18080
+    networks:
+      - odp_intra_network      
+    volumes:
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage 
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+    depends_on:
+      - spark-master
+      - metastore
+  spark-thrift-server:
+    image: spark_image
+    container_name: spark-thrift-server
+    environment:
+      - SPARK_WORKLOAD=thrift      
+    ports:
+      - 10000:10000
+      - 10001:10001
+    networks:
+      - odp_intra_network      
+    volumes:
+      - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
+    depends_on:
+      - spark-master 
+      - metastore      
+
+networks:
+  odp_intra_network:
+    external: true      
+
+volumes:
+  odp_intra_storage:
+    external: true    

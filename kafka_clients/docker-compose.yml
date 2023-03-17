@@ -1,0 +1,22 @@
+version: "3.6"
+services:
+  producer:
+    image: python:3.10-slim
+    container_name: producer
+    networks:
+      - odp_intra_network 
+    volumes:
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts     
+    command: tail -F anything 
+  consumer:
+    image: python:3.10-slim
+    container_name: consumer
+    networks:
+      - odp_intra_network  
+    volumes:
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/kafka_clients/sample_scripts:/sample_scripts            
+    command: tail -F anything 
+
+networks:
+  odp_intra_network:
+    external: true

@@ -1,0 +1,26 @@
+version: "3.6"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.42.0
+    container_name: prometheus
+    ports:
+      - 30090:9090
+    networks:
+      - odp_intra_network      
+    volumes:
+      - /Users/${USERNAME}/Documents/GitHub/vysh_temp/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/prometheus/prometheus:/prometheus
+  grafana:
+    image: grafana/grafana:9.3.6
+    container_name: grafana
+    ports:
+      - 3000:3000
+    networks:
+      - odp_intra_network     
+    volumes:
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/grafana/var/lib/grafana:/var/lib/grafana
+
+networks:
+  odp_intra_network:
+    external: true
