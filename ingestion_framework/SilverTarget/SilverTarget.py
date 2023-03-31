@@ -1,4 +1,4 @@
-from ingestion_framework.Includes.Utils import get_trigger_interval
+from Includes.Utils import get_trigger_interval
 from pyspark.sql.window import Window as W
 from pyspark.sql.functions import col, from_json, explode, posexplode, expr
 from pyspark.sql.types import StructType, StringType

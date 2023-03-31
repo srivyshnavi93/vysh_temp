@@ -1,4 +1,4 @@
-from ingestion_framework.Includes.Utils import try_get_column_int
+from Includes.Utils import try_get_column_int
 from pyspark.sql import Row
 from typing import Optional
 from dataclasses import dataclass
