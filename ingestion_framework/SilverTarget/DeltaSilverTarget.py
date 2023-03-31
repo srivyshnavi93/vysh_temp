@@ -1,5 +1,5 @@
-from ingestion_framework.SilverTarget.SilverTarget import SilverTarget
-from ingestion_framework.Includes.Utils import try_get_column_str, get_trigger_interval, get_max_bytes_per_trigger, split_or_null, validate_date_string
+from SilverTarget.SilverTarget import SilverTarget
+from Includes.Utils import try_get_column_str, get_trigger_interval, get_max_bytes_per_trigger, split_or_null, validate_date_string
 import pyspark.sql.functions as F 
 from pyspark.sql.window import Window as W
 from pyspark.sql import Row, DataFrame, SparkSession

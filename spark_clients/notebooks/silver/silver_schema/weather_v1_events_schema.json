@@ -38,7 +38,7 @@
                     },
                     {
                         "metadata": {},
-                        "name": "humidiy",
+                        "name": "humidity",
                         "nullable": true,
                         "type": "string"
                     },
@@ -51,6 +51,12 @@
                 ],
                 "type": "struct"
             }
+        },
+        {
+            "metadata": {},
+            "name": "message_sent_at",
+            "nullable": true,
+            "type": "string"
         }
     ],
     "type": "struct"

@@ -2,8 +2,8 @@ import argparse
 import sys
 import os
 
-from ingestion_framework.streaming.KafkaToBronze import KafkaToBronze
-from ingestion_framework.streaming.BronzeToSilver import BronzeToSilver
+from KafkaHandler.KafkaToBronze import KafkaToBronze
+from SilverTarget.BronzeToSilver import BronzeToSilver
 from pyspark.sql import SparkSession
 
 

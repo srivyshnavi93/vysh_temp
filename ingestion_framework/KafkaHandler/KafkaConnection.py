@@ -1,4 +1,4 @@
-from ingestion_framework.Includes.Utils import try_get_column_str, get_secret
+from Includes.Utils import try_get_column_str, get_secret
 from pyspark.sql import Row
 from typing import Optional
 from dataclasses import dataclass
@@ -17,13 +17,14 @@ class KafkaConnection:
     def from_row(cls, row: Row): 
     
         metadata_server = row["server"]
-        region=row["region"]
+        # region=row["region"]
+        region = None
 
         # kafka_server = get_secret(row["server"])
         # username = get_secret(row["username_key"]),
         # password = get_secret(row["password_key"]),
 
-        kafka_server = 'kafka-broker:9092'
+        kafka_server = 'kafka-broker-1:9092'
         username = None
         password = None
 

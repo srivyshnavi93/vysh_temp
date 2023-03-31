@@ -1,6 +1,6 @@
-from ingestion_framework.Includes.Utils import get_trigger_interval, get_max_offsets_per_trigger
-from ingestion_framework.KafkaHandler.KafkaConnection import KafkaConnection
-from ingestion_framework.KafkaHandler.BronzeTarget import BronzeTarget
+from Includes.Utils import get_trigger_interval, get_max_offsets_per_trigger
+from KafkaHandler.KafkaConnection import KafkaConnection
+from KafkaHandler.BronzeTarget import BronzeTarget
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import col
 from pyspark.sql.types import DateType
