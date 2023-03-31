@@ -11,20 +11,34 @@ services:
       - odp_intra_network
     volumes:
       - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/zookeeper/tmp/zookeeper:/tmp/zookeeper      
-  kafka-broker:
+  kafka-broker-1:
     image: kafka_image
-    container_name: kafka-broker
+    container_name: kafka-broker-1
     environment:
       - KAFKA_WORKLOAD=broker
+      - KAFKA_BROKER_ID=1
     ports:
       - 9092:9092
-      - 7071:7071
     networks:
       - odp_intra_network
     volumes:
-      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/kafka-broker/tmp/kafka-logs:/tmp/kafka-logs
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/kafka-broker/tmp/kafka-broker-1-logs:/tmp/kafka-logs
     depends_on:
-      - zookeeper    
+      - zookeeper
+  kafka-broker-2:
+    image: kafka_image
+    container_name: kafka-broker-2
+    environment:
+      - KAFKA_WORKLOAD=broker
+      - KAFKA_BROKER_ID=2
+    ports:
+      - 9093:9092
+    networks:
+      - odp_intra_network
+    volumes:
+      - /Users/${USERNAME}/docker_volumes/odp_intra_storage/kafka/kafka-broker/tmp/kafka-broker-2-logs:/tmp/kafka-logs
+    depends_on:
+      - zookeeper         
   kafka-ui:
     container_name: kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -33,10 +47,13 @@ services:
     networks:
       - odp_intra_network      
     depends_on:
-      - kafka-broker
+      - kafka-broker-1
+      - kafka-broker-2
     environment:
-      KAFKA_CLUSTERS_0_NAME: kafka-broker
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker:9092    
+      KAFKA_CLUSTERS_0_NAME: kafka-broker-1
+      KAFKA_CLUSTERS_1_NAME: kafka-broker-2
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker-1:9092
+      KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: kafka-broker-2:9092 
 
 networks:
   odp_intra_network:
