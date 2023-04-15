@@ -1,0 +1,26 @@
+{
+    "stream_filter": [],
+    "select": [
+        "concat_ws('-', topic, partition, offset, timestamp) as message_key",
+        "current_timestamp() as load_time",
+        "topic as kafka_topic",
+        "partition as kafka_partition",
+        "offset as kafka_offset",
+        "to_timestamp(timestamp) as kafka_timestamp",
+        "kafka_date",
+        "to_timestamp(payload.message_sent_at) as message_sent_at",
+        "payload.data.location as location",
+        "payload.data.time as time",
+        "payload.data.info as info",
+        "payload.data.temperature as temperature",
+        "payload.data.precipitation as precipitation",
+        "payload.data.humidity as humidity",
+        "payload.data.wind as wind"      
+    ],
+    "where": [],
+    "dedup_message_key": false,
+    "watermark_col": "",
+    "merge_cols": [],
+    "sequence_dict": {},
+    "sink_filter": []
+}
