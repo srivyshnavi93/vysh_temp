@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export USERNAME=manojmukkamala
+export USERNAME=vyshnavi
 
 docker-compose -f kafka_cluster/docker-compose.yml up -d
 
