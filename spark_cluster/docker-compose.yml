@@ -37,10 +37,6 @@ services:
     networks:
       - odp_intra_network      
     volumes:
-<<<<<<< HEAD
-      - /Users/vyshnavi/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/vysh_temp
-=======
->>>>>>> origin/staging
       - odp_intra_storage:/opt/spark/work-dir/odp_intra_storage
       - /Users/${USERNAME}/Documents/GitHub/vysh_temp/:/opt/spark/work-dir/odp_intra_storage/vysh_temp
     depends_on:
