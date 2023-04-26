@@ -17,7 +17,7 @@ then
         echo "${ERR_MSG}"
         exit 1
       fi
-      exec $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties --override zookeeper.connect="${ZOOKEEPER_HOST}":"${ZOOKEEPER_PORT}"
+      exec $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties --override zookeeper.connect="${ZOOKEEPER_HOST}":"${ZOOKEEPER_PORT}" --override broker.id="${KAFKA_BROKER_ID}"
     else
       exec $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
     fi
