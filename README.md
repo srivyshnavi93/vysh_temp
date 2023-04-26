@@ -1,6 +1,6 @@
 # Open Data Platform
 
-- This repository holds a project built using open source tools such as Apache Kafka and Apache Spark.
+- This repository holds a project built using open source tools such as Apache Kafka, Apache Spark, Apache Superset etc.
 - The goal of this project is to build an end to end data platform using open source tools and technologies.
 
 ### Pre-requisities:
@@ -9,14 +9,26 @@
 
 ### Developer Details:
 
-1. Create a docker network by running [intra_network.sh](intra_network/intra_network.sh) 
-2. Create a docker volume by running [intra_storage.sh](intra_storage/intra_storage.sh)
+__Deploying on Docker__
 
-3. Build spark image using [Docker file](spark_cluster/Dockerfile).
-4. Build mysql image using [Docker file](spark_cluster/metastore/Dockerfile).
-5. Build kafka image using [Docker file](kafka_cluster/Dockerfile).
+1. Create a docker network by running [intra_network.sh](docker/intra_network/intra_network.sh) 
+2. Create a docker volume by running [intra_storage.sh](docker/intra_storage/intra_storage.sh)
 
-6. Set the `USERNAME` environement in [run.sh](run.sh) and run the file to start the project.
+3. Build spark image using [Docker file](docker/spark_cluster/Dockerfile).
+4. Build mysql image using [Docker file](docker/spark_cluster/metastore/Dockerfile).
+5. Build kafka image using [Docker file](docker/kafka_cluster/Dockerfile).
+6. Set the `USERNAME` environement in [run.sh](docker/run.sh) and run the file to start the project.
+
+
+__Deploying on Kubernetes__
+
+TBD
+
+I am going to use a 3 node Kubernetes cluster built using Raspberry Pi's with microk8s running on top of them.
+
+Cluster info:
+- 1x Raspberry Pi 4 - 4 GB, 4 core CPU
+- 2x Raspberry Pi 4 - 8 GB, 4 core CPU
 
 ---
 
