@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-broker-service
+spec:
+  clusterIP: None
+  selector:
+    app: kafka-broker
+  ports:
+    - targetPort: 9092
+      port: 9092
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka-broker-statefulset
+spec:
+  serviceName: kafka-broker-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kafka-broker
+  template:
+    metadata:
+      labels:
+        app: kafka-broker
+    spec:
+      containers:
+      - name: kafka-broker
+        image: kub_kafka_image:latest
+        imagePullPolicy: Never
+        env:
+          - name: KAFKA_WORKLOAD
+            value: "broker"        
+          - name: ZOOKEEPER_HOST
+            value: zookeeper-service       
+        ports:
+        - containerPort: 9092

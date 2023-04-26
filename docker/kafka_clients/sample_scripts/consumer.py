@@ -2,9 +2,10 @@ from time import sleep
 from json import dumps, loads
 from kafka import KafkaConsumer
 
-topic_name = 'weather_test_v1'
+topic_name = 'test-topic-1'
 bootstrap_servers=['kafka-broker-1:9092']
-group_id='test-consumer-group-22'
+# bootstrap_servers=['kafka-broker-1-service:9092']
+group_id='test-consumer-group-1'
 
 my_consumer = KafkaConsumer(topic_name,
                             bootstrap_servers=bootstrap_servers,
@@ -16,4 +17,4 @@ my_consumer = KafkaConsumer(topic_name,
 
 for m in my_consumer:
     print(m.value)
-    sleep(10)
+    sleep(1)
