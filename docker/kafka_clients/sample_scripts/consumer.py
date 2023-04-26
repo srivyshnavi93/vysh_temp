@@ -3,8 +3,8 @@ from json import dumps, loads
 from kafka import KafkaConsumer
 
 topic_name = 'test-topic-1'
-#bootstrap_servers=['kafka-broker-1:9092']
-bootstrap_servers=['kafka-broker-1-service:9092']
+bootstrap_servers=['kafka-broker-1:9092']
+# bootstrap_servers=['kafka-broker-1-service:9092']
 group_id='test-consumer-group-1'
 
 my_consumer = KafkaConsumer(topic_name,
