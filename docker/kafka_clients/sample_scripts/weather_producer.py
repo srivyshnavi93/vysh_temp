@@ -40,8 +40,8 @@ def find_weather(city_name):
    except:
        raise Exception("Please enter a valid city name")
 
-
-kafka_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-statefulset-1.kafka-broker-service.open-data-platform.svc.cluster.local:9092'], value_serializer = lambda x:dumps(x).encode('utf-8'))
+kafka_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-1:9092'], value_serializer = lambda x:dumps(x).encode('utf-8'))
+# kafka_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-statefulset-1.kafka-broker-service.open-data-platform.svc.cluster.local:9092'], value_serializer = lambda x:dumps(x).encode('utf-8'))
 
 while True:
     # city_name = input("Enter City Name: ")
