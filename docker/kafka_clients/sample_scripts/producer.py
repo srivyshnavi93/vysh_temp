@@ -10,8 +10,8 @@ from kafka.admin import KafkaAdminClient, NewTopic
 
 import random
 
-# my_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-1:9092'],  value_serializer = lambda x:dumps(x).encode('utf-8'))
-my_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-1-service:9092'],  value_serializer = lambda x:dumps(x).encode('utf-8'))
+my_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-1:9092'],  value_serializer = lambda x:dumps(x).encode('utf-8'))
+# my_producer = KafkaProducer(bootstrap_servers = ['kafka-broker-1-service:9092'],  value_serializer = lambda x:dumps(x).encode('utf-8'))
 
 # for n in range(200, 250):
 while True:
