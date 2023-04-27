@@ -1,30 +1,20 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: kafka-ui-service
-spec:
-  type: NodePort
-  selector:
-    app: kafka-ui
-  ports:
-    - targetPort: 8080
-      port: 8080
----      
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: kafka-ui-deployment
+  name: kafka-ui
   labels:
-    app: kafka-ui
+    app: kafka-cluster
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kafka-ui
+      app: kafka-cluster
+      node: kafka-ui
   template:
     metadata:
       labels:
-        app: kafka-ui
+        app: kafka-cluster
+        node: kafka-ui
     spec:
       containers:
         - name: kafka-ui
@@ -32,16 +22,30 @@ spec:
           imagePullPolicy: Never
           env:
           - name: KAFKA_CLUSTERS_0_NAME
-            value: "kafka-broker-statefulset-0"     
+            value: "kafka-broker-0"     
           - name: KAFKA_CLUSTERS_1_NAME
-            value: "kafka-broker-statefulset-1"
+            value: "kafka-broker-1"
           - name: KAFKA_CLUSTERS_2_NAME
-            value: "kafka-broker-statefulset-2"            
+            value: "kafka-broker-2"            
           - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
-            value: "kafka-broker-statefulset-0.kafka-broker-service.open-data-platform.svc.cluster.local:9092"  
+            value: "kafka-broker-0.kafka-broker.open-data-platform.svc.cluster.local:9092"  
           - name: KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS
-            value: "kafka-broker-statefulset-1.kafka-broker-service.open-data-platform.svc.cluster.local:9092"
+            value: "kafka-broker-1.kafka-broker.open-data-platform.svc.cluster.local:9092"
           - name: KAFKA_CLUSTERS_2_BOOTSTRAPSERVERS
-            value: "kafka-broker-statefulset-2.kafka-broker-service.open-data-platform.svc.cluster.local:9092"                                                    
+            value: "kafka-broker-2.kafka-broker.open-data-platform.svc.cluster.local:9092"                                                    
           ports:
           - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-ui
+spec:
+  type: NodePort
+  selector:
+    app: kafka-cluster
+    node: kafka-ui
+  ports:
+    - targetPort: 8080
+      port: 9090
+      nodePort: 30090         

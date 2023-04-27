@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: spark-metastore
+  labels:
+    app: spark-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark-cluster
+      node: spark-metastore
+  template:
+    metadata:
+      labels:
+        app: spark-cluster
+        node: spark-metastore
+    spec:
+      containers:
+        - name: spark-metastore
+          image: mysql_metastore:latest
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: odp-intra-storage
+              mountPath: /var/lib/mysql       
+      volumes:
+        - name: odp-intra-storage
+          hostPath:
+            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage/mysql/var/lib/mysql           
+---            
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-metastore
+  labels:
+    app: spark-cluster
+spec:
+  type: ClusterIP
+  selector:
+    app: spark-cluster
+    node: spark-metastore
+  ports:
+    - targetPort: 3306
+      port: 3306     

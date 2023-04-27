@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: grafana
+  labels:
+    app: monitoring
+spec:
+  serviceName: grafana
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring
+      node: grafana
+  template:
+    metadata:
+      labels:
+        app: monitoring
+        node: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:9.3.6
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: odp-intra-storage
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: odp-intra-storage
+          hostPath: 
+            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage/grafana/var/lib/grafana
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: monitoring
+spec:
+  type: NodePort
+  selector:
+    app: monitoring
+    node: grafana
+  ports:
+    - targetPort: 3000
+      port: 3000
+      nodePort: 30303
+      name: grafana
