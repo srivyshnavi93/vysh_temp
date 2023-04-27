@@ -1,0 +1,9 @@
+numpy==1.24.3
+pandas==2.0.1
+matplotlib==3.7.1
+jupyterlab==3.6.3
+confluent-kafka==2.1.0
+delta-spark==2.3.0
+kafka-python3==3.0.0
+findspark==2.0.1
+mysql_connector_python==8.0.33

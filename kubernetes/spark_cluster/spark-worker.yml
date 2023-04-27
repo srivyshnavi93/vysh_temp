@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: spark-worker
+  labels:
+    app: spark-cluster
+spec:
+  serviceName: spark-worker
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spark-cluster
+      node: spark-worker
+  template:
+    metadata:
+      labels:
+        app: spark-cluster
+        node: spark-worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: kub_spark_image:latest
+          imagePullPolicy: Never
+          env:
+            - name: SPARK_WORKLOAD
+              value: "worker"
+          volumeMounts:
+            - name: odp-intra-storage
+              mountPath: /opt/spark/work-dir/odp_intra_storage           
+      volumes:
+        - name: odp-intra-storage
+          hostPath:
+            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage              
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-worker 
+  labels:
+    app: spark-cluster   
+spec:
+  clusterIP: None
+  selector:
+    app: spark-cluster
+    node: spark-worker
+  ports:
+    - targetPort: 8081
+      port: 8081       
+      name: spark-worker-metrics       

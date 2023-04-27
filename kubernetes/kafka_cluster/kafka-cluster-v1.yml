@@ -1,29 +1,21 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: kafka-broker-service
-spec:
-  clusterIP: None
-  selector:
-    app: kafka-broker
-  ports:
-    - targetPort: 9092
-      port: 9092
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: kafka-broker-statefulset
+  name: kafka-broker
+  labels:
+    app: kafka-cluster
 spec:
-  serviceName: kafka-broker-service
+  serviceName: kafka-broker
   replicas: 3
   selector:
     matchLabels:
-      app: kafka-broker
+      app: kafka-cluster
+      node: kafka-broker
   template:
     metadata:
       labels:
-        app: kafka-broker
+        app: kafka-cluster
+        node: kafka-broker
     spec:
       containers:
       - name: kafka-broker
@@ -33,6 +25,38 @@ spec:
           - name: KAFKA_WORKLOAD
             value: "broker"        
           - name: ZOOKEEPER_HOST
-            value: zookeeper-service       
+            value: zookeeper
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name              
         ports:
         - containerPort: 9092
+        volumeMounts:
+          - name: kafka-logs
+            mountPath: /tmp
+            subPathExpr: $(POD_NAME)
+      volumes:
+        - name: kafka-logs
+          hostPath:
+            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage/kafka/kafka-broker/tmp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-broker
+  labels:
+    app: kafka-cluster
+spec:
+  clusterIP: None
+  selector:
+    app: kafka-cluster
+    node: kafka-broker
+  ports:
+    - targetPort: 9092
+      port: 9092
+      name: kafka-broker-listener
+    - targetPort: 7071
+      port: 7071
+      name: kafka-broker-metrics 
