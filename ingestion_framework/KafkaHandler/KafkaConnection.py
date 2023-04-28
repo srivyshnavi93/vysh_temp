@@ -24,7 +24,8 @@ class KafkaConnection:
         # username = get_secret(row["username_key"]),
         # password = get_secret(row["password_key"]),
 
-        kafka_server = 'kafka-broker-1:9092'
+        # kafka_server = 'kafka-broker-1:9092'
+        kafka_server = 'kafka-broker-1.kafka-broker.open-data-platform.svc.cluster.local:9092'
         username = None
         password = None
 

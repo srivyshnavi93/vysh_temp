@@ -26,11 +26,16 @@ spec:
               value: "history"
           volumeMounts:
             - name: odp-intra-storage
-              mountPath: /opt/spark/work-dir/odp_intra_storage           
+              mountPath: /opt/spark/work-dir/odp_intra_storage
+            - name: notebooks
+              mountPath: /opt/spark/work-dir/odp_intra_storage/vysh_temp                 
       volumes:
         - name: odp-intra-storage
           hostPath:
-            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage              
+            path: /Users/manojmukkamala/kube_volumes/odp_intra_storage
+        - name: notebooks
+          hostPath:
+            path: /Users/manojmukkamala/Documents/GitHub/vysh_temp/              
 ---
 apiVersion: v1
 kind: Service
