@@ -1,4 +1,4 @@
-FROM mysql:debian
+FROM mysql:8.3.0
 
 ARG mysql_root_password
 ARG mysql_user
