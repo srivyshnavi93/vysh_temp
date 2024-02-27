@@ -35,7 +35,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "--module_name", 
         help="Name of the python module to run.", 
-        choices=['LayerOptimizer', 'KafkaToBronze', 'BronzeToSF', 'BronzeToSFCustom'],
+        choices=['LayerOptimizer', 'KafkaToBronze', 'BronzeToSilver'],
         required=True
         )
     parser.add_argument(

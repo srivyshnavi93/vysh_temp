@@ -28,20 +28,20 @@ class BronzeTarget:
                 
         return f"""CREATE TABLE IF NOT EXISTS 
                         `{self.database_name}`.`{self.table_name}` 
-                        (`key` BINARY, 
-                         `topic` STRING, 
+                        (`topic` STRING, 
                          `partition` INT, 
                          `offset` BIGINT, 
                          `timestamp` TIMESTAMP, 
-                         `timestampType` INT, 
+                         `timestampType` INT,
+                         `kafka_date` DATE,
+                         `key` BINARY,  
                          `value` BINARY, 
-                         `headers` ARRAY<STRUCT<key:STRING, value:BINARY>>,
-                         `kafka_date` DATE
+                         `headers` ARRAY<STRUCT<key:STRING, value:BINARY>>
                          )
                         USING DELTA
                         PARTITIONED BY (`kafka_date`)
                         COMMENT 'Bronze Delta Lake table corresponding to Kafka Topic {topic_name}'
-                        TBLPROPERTIES ('delta.dataSkippingNumIndexedCols' = 5)
+                        TBLPROPERTIES ('delta.dataSkippingNumIndexedCols' = 7)
                         """
       
     def write_to_bronze(self, df, batchId, logger, spark):
